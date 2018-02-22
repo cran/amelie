@@ -1,0 +1,17 @@
+711de593e36510b51bf04c9bd967c3a1 *DESCRIPTION
+88bcb3c1804b7e8d9ed6ec4d61768af1 *NAMESPACE
+a9aa64e187a2384113844fb18849598d *R/ad.R
+f284783611beaf4228ab079c32f48e88 *R/amelie.R
+c56d2acf636bc6179270944d30d7a5bd *R/predict.ad.R
+541b8a51e03d0053ad3f82615104b088 *R/utils.R
+87b39f198d1a5d8ae0ca6c7c86796e8b *build/vignette.rds
+9fec05299cfb7a85e0b9a86c0b399a77 *inst/doc/amelie-introduction.Rmd
+d7be37c5bedd8f5f83c443332c0c1746 *inst/doc/amelie-introduction.html
+7bfe320d4c8e41d9aa4261e254998e8d *man/ad.Rd
+bf28d563dfc9ea800aaec624730aa77d *man/amelie.Rd
+418b98765705e403cf87efd29525ab91 *man/predict.ad.Rd
+855c3c910419dc64fa8a71f9a8163491 *tests/testthat.R
+92722609a59e3451aa7cf8b09bb8b77b *tests/testthat/test_ad.R
+5831edf715deecaf04a3fdd9eb3f4b92 *tests/testthat/test_predict.ad.R
+fbc0a85cae4b3c1b5fccfe0162c9dedb *tests/testthat/test_utils.R
+9fec05299cfb7a85e0b9a86c0b399a77 *vignettes/amelie-introduction.Rmd

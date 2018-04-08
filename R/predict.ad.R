@@ -29,7 +29,7 @@
 #'@export
 predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...) {
   if (!inherits(object, "ad"))
-    stop("Object not of class ad.")
+    stop("object not of class ad.")
 
   if (!(type %in% c('class','prob'))){
     stop("type must be either 'class' or 'prob'.")
@@ -51,12 +51,16 @@ predict.ad <- function(object, newdata, type = 'class', na.action = na.pass, ...
   }
 
   epsilon <- object$epsilon
-  train_x_mean <- object$train_x_mean
-  train_x_sd <- object$train_x_sd
+  train_mean <- object$train_mean
+  train_var <- object$train_var
 
 
   #prediction
-  newdata_probs_prod <- .univariate_gaussian(x,train_x_mean,train_x_sd)
+  if (object$univariate == TRUE) {
+    newdata_probs_prod <- .univariate_pdf(x,train_mean,train_var)
+  } else {
+    newdata_probs_prod <- .multivariate_pdf(x,train_mean,train_var)
+  }
   if (type == 'class') {
     predictions <- as.numeric(newdata_probs_prod < epsilon)
     return(predictions)

@@ -5,20 +5,21 @@
 \alias{ad.formula}
 \alias{ad.default}
 \alias{print.ad}
-\title{ad: anomaly detection with normal probability functions.}
+\title{ad: anomaly detection with normal probability density functions.}
 \usage{
 ad(x, ...)
 
 \method{ad}{formula}(formula, data, na.action = na.omit, ...)
 
-\method{ad}{default}(x, y, na.action = na.omit, ...)
+\method{ad}{default}(x, y, univariate = TRUE, score = "f1", steps = 1000,
+  ...)
 
 \method{print}{ad}(x, ...)
 }
 \arguments{
 \item{x}{A matrix of numeric features.}
 
-\item{...}{Currently not used.}
+\item{...}{Optional parameters to be passed to ad.default.}
 
 \item{formula}{An object of class "formula": a symbolic description of the
 model to be fitted.}
@@ -30,23 +31,41 @@ found.}
 
 \item{y}{A vector of numeric target values, either 0 or 1, with 1
 assumed to be anomalous.}
+
+\item{univariate}{Logical indicating whether the univariate pdf should be used.}
+
+\item{score}{String indicating which score to use in optimization:
+\code{f1} (default) or \code{mcc}.}
+
+\item{steps}{Integer number of steps to take during epsilon optimization, default 1e3.}
 }
 \value{
 An object of class \code{ad}:
   \item{call}{The original call to \code{ad}.}
+  \item{univariate}{Logical indicating which pdf was computed.}
+  \item{score}{The score that was used for optimization.}
   \item{epsilon}{The threshold value.}
+  \item{train_mean}{Means of features in the training set.}
+  \item{train_var}{Variances of features in the training set. If \code{univariate=FALSE}}, holds the covariance matrix for the features.
+  \item{val_score}{The score obtained on the validation data set.
+  0 to 1 for F1 score, -1 to 1 for Matthews correlation coefficient}
 }
 \description{
-ad: anomaly detection with normal probability functions.
+ad: anomaly detection with normal probability density functions.
 }
 \details{
-\code{amelie} implements anomaly detection with normal probability functions
-and maximum likelihood estimates.
+\code{amelie} implements anomaly detection with normal probability
+functions and maximum likelihood estimates.
 
 Features are assumed to be continuous, and the target is assumed to take
-on values of 0 (negative case, no anomaly) or 1 (positive case, anomaly).
+on values of \code{0} (negative case, no anomaly) or \code{1} (positive
+case, anomaly).
 
-The threshold \code{epsilon} is optimized using the F1 score.
+The threshold \code{epsilon} is optimized using the either the Matthews
+correlation coefficient or F1 score.
+
+Variance and covariance are computed using \code{var} and \code{cov}, where
+denominator \code{n-1} is used.
 
 Algorithm details are described in the Introduction vignette.
 
@@ -65,5 +84,9 @@ mat_fit <- ad(x = x, y = y)
 
 }
 \references{
-\url{https://www.coursera.org/learn/machine-learning}
+\href{https://www.coursera.org/learn/machine-learning}{Machine learning course}
+
+\href{https://en.wikipedia.org/wiki/Confusion_matrix}{Confusion matrix}
+
+\href{https://en.wikipedia.org/wiki/Matthews_correlation_coefficient}{Matthews correlation coefficient}
 }

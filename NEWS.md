@@ -1,4 +1,8 @@
-# amelie 0.2.0.9000
+# amelie 0.2.1
+
+* Added RNG hotfix as per CRAN instructions, for the upcoming R 3.6 change.
+
+# amelie 0.2.0
 
 * Added multivariate option for probability density function calculation.
 * Added Matthews correlation coefficient as score for epsilon optimization.
